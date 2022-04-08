@@ -12,9 +12,27 @@ document.querySelector('.busca').addEventListener('submit', async event => {
 
     let results = await fetch(url);
     let json = await results.json();
-    console.log(json);
+
+    if (json.cod === 200) {
+      showInfo({
+        name: json.name,
+        country: json.sys.country,
+        temp: json.main.temp,
+        tempIcon: json.weather[0].icon,
+        windSpeed: json.wind.speed,
+        windAngle: json.wind.deg
+      });
+    } else {
+      showWarning('Não encontramos essa localização');
+    }
   }
 });
+
+function showInfo(json) {
+  showWarning('');
+
+  document.querySelector('.resultado').style.display = 'block';
+}
 
 function showWarning(message) {
   document.querySelector('.aviso').innerHTML = message;
