@@ -110,6 +110,7 @@ h1 {
     height: 1px;
     background-color: #FFF;
     transform-origin: left;
+    transform: rotate(0deg)
 }
 
 .aviso {
