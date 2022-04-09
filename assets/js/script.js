@@ -4,6 +4,7 @@ document.querySelector('.busca').addEventListener('submit', async event => {
   let input = document.querySelector('#searchInput').value;
 
   if (input !== '') {
+    clearInfo();
     showWarning('Carregando...');
 
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(
@@ -23,6 +24,7 @@ document.querySelector('.busca').addEventListener('submit', async event => {
         windAngle: json.wind.deg
       });
     } else {
+      clearInfo();
       showWarning('Não encontramos essa localização');
     }
   }
@@ -49,6 +51,11 @@ function showInfo(json) {
   document.querySelector('.ventoPonto').style.transform = `rotate(${
     json.windAngle - 90
   }deg)`;
+}
+
+function clearInfo() {
+  showWarning('');
+  document.querySelector('.resultado').style.display = 'none';
 }
 
 function showWarning(message) {
